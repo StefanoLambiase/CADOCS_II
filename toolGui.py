@@ -1,5 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
+
+import requests
+from flask import json
+from requests import Response
+
 from src.chatbot.intent_manager import IntentManager
 from src.intent_handling.cadocs_intent import CadocsIntents
 from src.intent_handling.intent_resolver import IntentResolver
@@ -105,6 +110,7 @@ class CADOCS:
         self.textWidget.configure(state=tk.NORMAL)
         self.textWidget.tag_configure("CADOCS", justify="left")
         self.messageEntry.delete(0, tk.END)
+
         if (intent == CadocsIntents.GetSmells or intent == CadocsIntents.GetSmellsDate) and msg[1] == 890:
             if msg[1] == 890:
                 text = msg[0]
@@ -130,13 +136,18 @@ class CADOCS:
         print("INTENT:", intent)
 
         if entities:
-            print("Entities: ", entities[0])
             # instantiate the resolver
             resolver = IntentResolver()
             # run tool
-            result = resolver.resolve_intent(intent, entities)
-            print("RESULT", result)
+            url = "http://127.0.0.1:5000/resolve_intent"
+            headers = {"Content-Type": "application/json"}
 
+            data = {"intent": intent.value, "entities": entities}
+            result: Response = requests.post(url, headers=headers, data=json.dumps(data))
+
+            #result = resolver.resolve_intent(intent, entities)
+
+            result = result.json()
         return intent, result, entities,lang,"CADOCS"
 
 
