@@ -12,8 +12,8 @@ class CsDetectorTool(Tool):
         print("\n\n\nSono in execute tool",data)
         print("\n\n\n")
         #if we have 2 entities (repo and date), we execute the tool with date parameter
-        if data.__len__() > 2:
-            req = requests.get(os.environ.get('CSDETECTOR_URL_GETSMELLS')+'?repo='+data[0]+'&pat='+os.environ.get('PAT',"")+"&date="+data[1])
+        if data.__len__() >= 2:
+            req = requests.get(os.environ.get('CSDETECTOR_URL_GETSMELLS')+'?repo='+data[0]+'&pat='+os.environ.get('PAT',"")+"&start="+data[1])
         else:
             req = requests.get(os.environ.get('CSDETECTOR_URL_GETSMELLS')+'?repo='+data[0]+'&pat='+os.environ.get('PAT',"")) #+'&user='+data[data.__len__()-1]+"&graphs=True"
         
