@@ -19,7 +19,7 @@ def build_cs_message(smells, entities, lang):
     elif lang == "it":
         text += f"Ciao 👋🏼\n"
 
-    if len(entities) > 2:
+    if len(entities) >= 2:
         if lang == "en":
             text += f"These are the community smells we were able to detect in the repository {entities[0]} starting from {entities[1]}:\n"
         elif lang == "it":
