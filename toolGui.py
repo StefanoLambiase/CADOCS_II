@@ -144,7 +144,6 @@ class CADOCS:
 
             data = {"intent": intent.value, "entities": entities}
             result: Response = requests.post(url, headers=headers, data=json.dumps(data))
-
             #result = resolver.resolve_intent(intent, entities)
 
             result = result.json()
@@ -171,6 +170,7 @@ def login():
         onCreate()
 
 if __name__ == "__main__":
+   # qui avviare il web service
     if not pat:
         login()
     else:
