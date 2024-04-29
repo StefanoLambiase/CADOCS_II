@@ -9,6 +9,8 @@ from src.chatbot.intent_manager import IntentManager
 from src.intent_handling.cadocs_intent import CadocsIntents
 from src.intent_handling.intent_resolver import IntentResolver
 from src.service.cadocs_messages import build_message, build_error_message
+from src.intent_handling.intent_web_service import app as cadocs_web_service
+import multiprocessing
 from loginGui import LoginCadocs
 import os
 from dotenv import load_dotenv
@@ -169,9 +171,22 @@ def login():
         login_window.mainloop()
         onCreate()
 
-if __name__ == "__main__":
-   # qui avviare il web service
+
+def run_web_service():
+    cadocs_web_service.run(port=5000)
+
+
+def login_or_create():
     if not pat:
         login()
     else:
         onCreate()
+
+
+if __name__ == '__main__':
+    # Create a multiprocessing Process for running the web service
+    web_service_process = multiprocessing.Process(target=run_web_service)
+    web_service_process.start()
+
+    # Call the function for login or onCreate in the main process
+    login_or_create()
