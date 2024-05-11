@@ -6,3 +6,4 @@ class CadocsIntents(enum.Enum):
     GetSmellsDate = "get_smells_date"
     Report = "report"
     Info = "info"
+    Geodispersion = "geodispersion"

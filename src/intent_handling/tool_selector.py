@@ -2,6 +2,7 @@ from __future__ import annotations
 from src.intent_handling.tool_strategy import Tool
 from typing import List
 
+
 # this is the context for our strategy pattern
 class ToolSelector():
     def __init__(self, strategy: Tool) -> None:
@@ -13,7 +14,7 @@ class ToolSelector():
     @property
     def strategy(self) -> Tool:
         return self._strategy
-    
+
     # we could change the strategy, even at runtime
     @strategy.setter
     def strategy(self, strategy: Tool) -> None:
