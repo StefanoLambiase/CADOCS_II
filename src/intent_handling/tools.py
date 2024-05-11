@@ -42,6 +42,64 @@ class CsDetectorTool(Tool):
         return results
 
 
+def check_list_format(lst: List) -> bool:
+    """
+        Checks if the provided data list is formatted correctly according to the expected structure.
+
+        :param lst: List of dictionaries where each dictionary is built like this:
+                    {"number": 1000, "nationality": "Germany"}
+        :return: True if the data list is formatted correctly, False otherwise.
+        """
+    # Check if the list is empty
+    if not lst:
+        return False
+
+    # Controlla se ogni elemento della lista è un dizionario con le chiavi 'number' e 'nationality'
+    for item in lst:
+        if not isinstance(item, dict) or 'number' not in item or 'nationality' not in item:
+            return False
+
+    return True
+
+
 class CultureInspectorTool(Tool):
+    """
+    CultureInspectorTools implements one of the concrete strategies
+    within the strategy design pattern.
+    This specific strategy enables users to utilize
+    the geodispersion inspector for computing
+    the cultural geodispersion metrics of their team.
+    """
     def execute_tool(self, data: List):
-        pass
+        """
+        Executes the CultureInspector tool by calling its webservice.
+        :param data: List of dictionaries where each dictionary is built like this:
+                {"number": 1000, "nationality": "Germany"}
+        :return: A json with the hofstede metrics computed by the CultureInspector tool.
+                e.g. {
+                    "idv": 11.018476844566461,
+                    "ind": 2.0,
+                    "lto": 5.0,
+                    "mas": 11.955627250395782,
+                    "pdi": 13.118079804840942,
+                    "uai": 10.497231933093088,
+                    "null_values": {
+                        "Panama": [
+                            "lto",
+                            "ind"
+                        ]
+                    }
+                }
+                or if the data is not formatted correctly:
+                ["the list of developers is not well formed", code = "500"]
+        """
+        if check_list_format(data):
+            req = requests.post(os.environ.get('GEODISPERSION_URL'), json=data)
+            result = req.json()
+        else:
+            error_text = "the list of developers is not well formed"
+            code = "500"
+            result = [error_text, code]
+
+        return result
+
