@@ -1,5 +1,5 @@
 import traceback
-
+import requests
 from flask import Flask, jsonify, request, make_response
 
 from src.intent_handling.cadocs_intent import CadocsIntents
@@ -32,6 +32,10 @@ def build_intent(intent_value: str) -> CadocsIntents:
 
     raise ValueError(f"Unknown intent: {intent_value}")
 
+@app.route('/prova', methods=['GET'])
+def prova():
+    response = requests.get('http://server2:5006/some_endpoint')
+    return response.text
 
 @app.route('/resolve_intent', methods=['POST'])
 def resolve():
@@ -69,4 +73,4 @@ def resolve():
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(host = "0.0.0.0", port=5005, debug=True)
