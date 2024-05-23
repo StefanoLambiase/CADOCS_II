@@ -1,16 +1,14 @@
 import json
 from src.intent_handling.cadocs_intent import CadocsIntents
 from src.service.language_handler import LanguageHandler
+import os
 
+current_dir = os.path.dirname(__file__)
+parent_dir = os.path.dirname(current_dir)
+path_to_smells = os.path.join(parent_dir,'community_smells.json')
 
 #Sistemare la classe
 def build_cs_message(smells, entities, lang):
-    #lang = LanguageHandler().get_current_language()
-    
-
-    print("\n\n\nSTAMPA STAMPA STAMPA Linguaggio",lang)
-    print("\n\n\n")
-    
     # Testo che verrà restituito
     text = ""
 
@@ -30,9 +28,11 @@ def build_cs_message(smells, entities, lang):
         elif lang == "it":
             text += f"Questi sono i community smells che siamo stati in grado di rilevare nella repository {entities[0]}:\n"
 
+
+
     if lang == "en":
         # Aggiunta del testo per ogni smell rilevato
-        with open('src/community_smells.json', encoding='utf-8') as fp:
+        with open(path_to_smells, encoding='utf-8') as fp:
             data = json.load(fp)
             for s in smells:
                 smell_data = [sm for sm in data if sm["acronym"] == s]
@@ -47,7 +47,7 @@ def build_cs_message(smells, entities, lang):
                     for st in strategies:
                         text += f">{st.get('strategy')}\n{st.get('stars')}\n"
     elif lang == "it":
-        with open('src/community_smells_it.json', encoding='utf-8') as fp:
+        with open(path_to_smells, encoding='utf-8') as fp:
             data = json.load(fp)
             for s in smells:
                 smell_data = [sm for sm in data if sm["acronym"] == s]
@@ -107,7 +107,7 @@ def build_info_message(lang):
 
     # Aggiunta del testo per ogni smell
     if lang == "en":
-        with open('src/community_smells.json', encoding='utf-8') as fp:
+        with open(path_to_smells, encoding='utf-8') as fp:
             data = json.load(fp)
             for i in data:
                 text += f"----------------------------\n*{i.get('name')}*  -  {i.get('acronym')}  -  {i.get('emoji')}\n{i.get('description')}\n"
@@ -120,7 +120,7 @@ def build_info_message(lang):
             text += "Also, feel free to get in touch with us to have a discussion about the subject by sending us an email at slambiase@unisa.it!"
         
     elif lang == "it":
-        with open('src/community_smells_it.json', encoding='utf-8') as fp:
+        with open(path_to_smells, encoding='utf-8') as fp:
             data = json.load(fp)
             for i in data:
                 text += f"----------------------------\n*{i.get('name')}*  -  {i.get('acronym')}  -  {i.get('emoji')}\n{i.get('description')}\n"
