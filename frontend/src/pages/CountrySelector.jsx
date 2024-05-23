@@ -62,6 +62,31 @@ const CountrySelector = () => {
     };
   }, []);
 
+  const sendRequest = ( () => {
+    const entriesList = Array.from(selectedOptionMap.entries());
+
+    const mappedArray = entriesList
+        .map(([country, number]) => ({
+          "number": number,
+          "nationality": country
+        }));
+
+    fetch("http://127.0.0.1:5004/compute_std_dev",{ // to do change the url to cadocs
+      method: "POST",
+      headers:{"Content-Type": "application/json"},
+      body:JSON.stringify(mappedArray)
+      }).then(async response =>  {
+        if(response.status !== 200){
+          alert("errore")
+        }
+        else {
+          let result = await response.json()
+          console.log(result["idv"])
+        }
+      })
+
+  });
+
   return (
     <div className="App">
       <div className="custom-select" onClick={() => setIsOptionsVisible(!isOptionsVisible)} ref={optionsRef}>
@@ -114,6 +139,7 @@ const CountrySelector = () => {
           </div>
         </div>
       )}
+      <button onClick={() => sendRequest()}>Compute</button>
     </div>
   );
 }

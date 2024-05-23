@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import CountrySelector from './CountrySelector';
+import CountrySelector from './pages/CountrySelector';
 
 const App = () => {
 
