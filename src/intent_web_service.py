@@ -49,7 +49,7 @@ def resolve_utils(data:dict):
         traceback.print_exc()
         return jsonify({"error": "An error occurred while resolving intent: " + str(e)}), 500
 
-    return result
+    return jsonify(result)
 
 @app.route('/resolve_intent', methods=['POST'])
 def resolve():
