@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
-LABEL authors="leopoldotodisco"
+LABEL authors="benedettoscala"
 
 RUN apt-get update && apt install -y build-essential \
     && apt-get install -y software-properties-common \
@@ -23,8 +23,8 @@ COPY . /app
 RUN pip install -r requirements.txt
 
 # Run the application:
-COPY intent_web_service.py .
+COPY runner.py .
 
-CMD ["python", "intent_web_service.py"]
+CMD ["python", "runner.py"]
 
 EXPOSE 5005
