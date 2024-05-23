@@ -8,3 +8,4 @@ class Tool(ABC):
     @abstractmethod
     def execute_tool(self, data: List):
         pass
+

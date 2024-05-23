@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch
 from src.intent_handling.intent_resolver import IntentResolver
-from src.intent_handling.intent_web_service import app
+from src.intent_web_service import app
 
 risultato_atteso_success = {'Index': 0, 'StartingDate': '12/22/2022',
                             'Smell1': ['BCE', 'Black-cloud Effect'],
