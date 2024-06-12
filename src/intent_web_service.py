@@ -5,9 +5,11 @@ from flask import Flask, json, jsonify, redirect, request, make_response, url_fo
 from src.intent_handling.cadocs_intent import CadocsIntents
 from src.intent_handling.intent_resolver import IntentResolver
 from src.chatbot.intent_manager import IntentManager
+from flask_cors import CORS
 
 app = Flask(__name__)
 
+CORS(app)
 
 def build_intent(intent_value: str) -> CadocsIntents:
     """
@@ -56,6 +58,7 @@ def resolve_chatbot_intent():
     """
     intent_manager = IntentManager()
     intent, entities, _, _ = intent_manager.detect_intent(request.json["message"])
+    print("Messaggio" + request.json["message"])
     if entities:
         data = {"intent": intent.value, "entities": entities}
 
