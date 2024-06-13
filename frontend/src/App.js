@@ -18,7 +18,7 @@ import menu from "./components/menu";
 const AppRoutes = () =>{
     return (
         <Routes>
-            <Route path="/culture_inspector" element={<AppShell> <CountrySelector/></AppShell> }/>
+            <Route path="/" element={<AppShell> <CountrySelector/></AppShell> }/>
             <Route path="/chatbot" element={<AppShell> <ChatbotPage/> </AppShell>}/>
         </Routes>
     )
