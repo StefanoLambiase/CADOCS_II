@@ -27,12 +27,14 @@ const CountrySelector = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentCountry, setCurrentCountry] = useState('');
   const [participants, setParticipants] = useState(1);
-
+  const [geoDistribution, setGeoDistribution] = useState(null);
+  const [result, setResult] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const optionsRef = useRef(null);
 
   const openModal = (countryName) => {
     setCurrentCountry(countryName);
-    setParticipants(1); // Reset participants to 1 when opening modal
+    setParticipants(1);
     setIsModalVisible(true);
   };
 
@@ -62,14 +64,20 @@ const CountrySelector = () => {
     };
   }, []);
 
-  const sendRequest = ( () => {
+  const sendRequest = () => {
+    if (!selectedOptionMap.size || geoDistribution === null) {
+      setErrorMessage('Please select at least one country and a geographical dispersion option.');
+      return;
+    }
+
     const entriesList = Array.from(selectedOptionMap.entries());
 
-    const mappedArray = entriesList
+    let mappedArray = entriesList
         .map(([country, number]) => ({
           "number": number,
-          "nationality": country
+          "nationality": country,
         }));
+    mappedArray.push({"geographical_dispersion": geoDistribution});
 
     fetch("http://127.0.0.1:5004/compute_std_dev",{ // to do change the url to cadocs
       method: "POST",
@@ -77,71 +85,103 @@ const CountrySelector = () => {
       body:JSON.stringify(mappedArray)
       }).then(async response =>  {
         if(response.status !== 200){
-          alert("errore")
+          alert("error")
         }
         else {
           let result = await response.json()
-          console.log(result["idv"])
+          console.log(result);
+          setResult(JSON.stringify(result));
+          let descriptions = [];
+          for (let key in result) {
+          for (let key2 in result[key]) {
+            descriptions.push(result[key][key2]);
+          }
+            }
+        let descriptionsText = descriptions.join('\n');
+         setResult(descriptionsText);
         }
       })
-
-  });
+  };
 
   return (
-    <div className="App">
-      <div className="custom-select" onClick={() => setIsOptionsVisible(!isOptionsVisible)} ref={optionsRef}>
-        <h2 style={{ textAlign: 'center' }}>Country Selector</h2>
-        <div className="selected-values">
-          {Array.from(selectedOptionMap.entries()).map(([country, number]) => (
-            <div key={country} className="selected-value">
-              <span>{country} ({number})</span>
-              <button className="remove-button" onClick={(e) => {
-                e.stopPropagation();
-                removeSelectedOption(country);
-              }}>x</button>
-            </div>
-          ))}
-          {!selectedOptionMap.size && 'Seleziona i paesi'}
-        </div>
-        {isOptionsVisible && (
-          <div className={`options ${isOptionsVisible ? 'active' : ''}`}>
-            {countries.map(country => (
-              <div key={country} className="option" onClick={() => selectedOptionMap.has(country) ? removeSelectedOption(country) : openModal(country)}>
-                {country}
-              </div>
+      <div className="App">
+        <div className="custom-select" onClick={() => setIsOptionsVisible(!isOptionsVisible)} ref={optionsRef}>
+          <h2>Country Selector</h2>
+          <div className="selected-values">
+            {Array.from(selectedOptionMap.entries()).map(([country, number]) => (
+                <div key={country} className="selected-value">
+                  <span>{country} ({number})</span>
+                  <button className="remove-button" onClick={(e) => {
+                    e.stopPropagation();
+                    removeSelectedOption(country);
+                  }}>x
+                  </button>
+                </div>
             ))}
+            {!selectedOptionMap.size && 'Select countries'}
           </div>
-        )}
-      </div>
+          {isOptionsVisible && (
+              <div className={`options ${isOptionsVisible ? 'active' : ''}`}>
+                {countries.map(country => (
+                    <div key={country} className="option"
+                         onClick={() => selectedOptionMap.has(country) ? removeSelectedOption(country) : openModal(country)}>
+                      {country}
+                    </div>
+                ))}
+              </div>
+          )}
+        </div>
 
-      {isModalVisible && (
-        <div className="modal" style={{ display: 'block' }}>
-          <div className="modal-content">
-            <span className="close" onClick={() => setIsModalVisible(false)}>&times;</span>
-            <h2>Seleziona il numero di partecipanti</h2>
-            <p>Paese selezionato: {currentCountry}</p>
-            <div className="modal-input">
-              <label htmlFor="participantsInput">Numero di partecipanti:</label>
-              <input
-                type="number"
-                id="participantsInput"
-                min="1"
-                max="10"
-                value={participants}
-                onChange={e => setParticipants(e.target.value)}
-              />
-              <span>{participants} partecipanti</span>
+        {isModalVisible && (
+            <div className="modal" style={{display: 'block'}}>
+              <div className="modal-content">
+                <span className="close" onClick={() => setIsModalVisible(false)}>&times;</span>
+                <h2 className="modal-header">Select number of participants</h2>
+                <p>Selected Country: {currentCountry}</p>
+                <div className="modal-input">
+                  <label htmlFor="participantsInput">Number of participants:</label>
+                  <input
+                      type="number"
+                      id="participantsInput"
+                      min="1"
+                      value={participants}
+                      onChange={e => setParticipants(e.target.value)}
+                  />
+                  <span>{participants} participants</span>
+                </div>
+                <div className="modal-buttons">
+                  <button className="cancel-button" onClick={() => setIsModalVisible(false)}>Cancel</button>
+                  <button className="ok-button" onClick={handleSelect}>OK</button>
+                </div>
+              </div>
             </div>
-            <div className="modal-buttons">
-              <button className="cancel-button" onClick={() => setIsModalVisible(false)}>Annulla</button>
-              <button className="ok-button" onClick={handleSelect}>OK</button>
+        )}
+
+        <div className="content-wrapper">
+          <div className="geographical-question">
+            <p>Is your team or development community geographically distributed (i.e., do its participants work from
+              different locations scattered around the globe)?</p>
+            <div className="radio-buttons-container">
+              <label><input type="radio" name="geoDistribution" value="100" onChange={() => setGeoDistribution(100)}/> All members of the community work from
+                different parts of the globe.</label>
+              <label><input type="radio" name="geoDistribution" value="75" onChange={() => setGeoDistribution(75)}/> Almost all (about 75%) members of the
+                community work from different parts of the globe.</label>
+              <label><input type="radio" name="geoDistribution" value="50" onChange={() => setGeoDistribution(50)}/> Most (about 50%) of the members of the
+                community work from different parts of the globe.</label>
+              <label><input type="radio" name="geoDistribution" value="25" onChange={() => setGeoDistribution(25)}/> A small portion (about 25%) of the members
+                of the community work from different parts of the globe.</label>
+              <label><input type="radio" name="geoDistribution" value="0" onChange={() => setGeoDistribution(0)}/> All members of the community work in the
+                same location.</label>
             </div>
           </div>
         </div>
-      )}
-      <button onClick={() => sendRequest()}>Compute</button>
-    </div>
+
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+        <textarea value={result} readOnly></textarea>
+        <button onClick={sendRequest} disabled={!selectedOptionMap.size || geoDistribution === null}>Compute</button>
+      </div>
   );
-}
+};
 
 export default CountrySelector;
