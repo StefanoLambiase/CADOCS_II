@@ -1,16 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatbotPage.css';
 
-function setMaxWidthAndHeight() {
-  document.documentElement.style.setProperty('--max-width', `${window.innerWidth - 40}px`);
-  document.documentElement.style.setProperty('--max-height', `${window.innerHeight - 40}px`);
-}
+
 
 const ChatbotPage = () => {
-  document.documentElement.style.setProperty('--max-width', `${window.innerWidth - 40}px`);
-  document.documentElement.style.setProperty('--max-height', `${window.innerHeight - 40}px`);
-  window.addEventListener('resize', setMaxWidthAndHeight);
-  window.addEventListener('load', setMaxWidthAndHeight);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);

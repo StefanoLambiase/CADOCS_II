@@ -104,7 +104,7 @@ const CountrySelector = () => {
   };
 
   return (
-      <div className="App">
+      <div className="country-selector-page">
         <div className="custom-select" onClick={() => setIsOptionsVisible(!isOptionsVisible)} ref={optionsRef}>
           <h2>Country Selector</h2>
           <div className="selected-values">

@@ -1,20 +1,12 @@
-html, body
-{
-    height: 100%;
-    width: 100%;
+.chatbot-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 90vw;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
-.chatbot-page {
-    display: flex;
-    flex-direction: column;
-    height: var(--max-height);;
-    width: var(--max-width);
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
   .header {
     display: flex;
     align-items: center;
