@@ -35,45 +35,11 @@ def build_intent(intent_value: str) -> CadocsIntents:
 
     raise ValueError(f"Unknown intent: {intent_value}")
 
-@app.route("/resolve_chatbot_intent", methods=["POST"])
-def resolve_chatbot_intent():
-    """
-    Funzione che si occupa di risolvere l'intent del chatbot.
-
-    Parameters
-    -----------
-
-    Returns
-    -----------
-    intent: intent del chatbot
-    result: risultato dell'operazione
-    entities: entità rilevate
-    lang: lingua del messaggio
-    "CADOCS": nome del tool
-
-    Raises
-    -----------
-    Exception
-
-    """
-    intent_manager = IntentManager()
-    intent, entities, _, _ = intent_manager.detect_intent(request.json["message"])
-    print("Messaggio" + request.json["message"])
-    if entities:
-        data = {"intent": intent.value, "entities": entities}
-
-
-        #redirect to the resolve_intent route
-        result = resolve_utils(data)
-
-    return result
-
-
 def resolve_utils(data:dict):
     """
     Funzione che si occupa di risolvere un intent richiamando IntentResolver.
     """
-
+    #se c'è il campo message
     if 'intent' not in data or 'entities' not in data:
         return jsonify({"error": "Invalid request: 'intent' and 'entities' fields required"}), 400
 
@@ -85,26 +51,43 @@ def resolve_utils(data:dict):
         traceback.print_exc()
         return jsonify({"error": "An error occurred while resolving intent: " + str(e)}), 500
 
-    return result
+    return jsonify(result)
 
 @app.route('/resolve_intent', methods=['POST'])
 def resolve():
     """
-    Route che si occupa di risolvere un intent richiamando IntentResolver.
-
+    Funzione che si occupa di risolvere un intent richiamando IntentResolver.
     Parameters
     -----------
-
+    data: json contenente il messaggio da analizzare che può essere di due tipi:
+        {
+            "message": "stringa del messaggio"
+        }
+        oppure
+        {
+            "entities": [
+                {"number": 1000, "nationality": "Germany"},
+                {"number": 1000, "nationality": "Italy"}
+            ]
+        }
     Returns
     -----------
-    result: output del tool legato all'intent
-
-    Raises
-    -----------
-    Exception
+    json: risultato dell'analisi del messaggio
     """
+    
     try:
         data = request.get_json()
+        
+        #se c'è il campo message
+        if 'message' in data:
+            intent_manager = IntentManager()
+            intent, entities, _, _ = intent_manager.detect_intent(data["message"])
+            if entities:
+                data = {"intent": intent.value, "entities": entities}
+        else:
+            #se non c'è message è probabilmente un geo-dispersion
+            data = {"intent": "geodispersion", "entities": data['entities']}
+        
     except:
         return jsonify({"error": "Invalid request: JSON required"}), 400
 

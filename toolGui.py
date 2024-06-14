@@ -9,7 +9,7 @@ from src.chatbot.intent_manager import IntentManager
 from src.intent_handling.cadocs_intent import CadocsIntents
 from src.intent_handling.intent_resolver import IntentResolver
 from src.service.cadocs_messages import build_message, build_error_message
-from src.intent_handling.intent_web_service import app as cadocs_web_service
+from src.intent_web_service import app as cadocs_web_service
 import multiprocessing
 from loginGui import LoginCadocs
 import os
