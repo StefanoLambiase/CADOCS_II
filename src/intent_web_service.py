@@ -7,6 +7,8 @@ from src.intent_handling.intent_resolver import IntentResolver
 from src.chatbot.intent_manager import IntentManager
 from flask_cors import CORS
 
+from src.service.cadocs_messages import build_message
+
 app = Flask(__name__)
 
 CORS(app)
@@ -35,7 +37,7 @@ def build_intent(intent_value: str) -> CadocsIntents:
 
     raise ValueError(f"Unknown intent: {intent_value}")
 
-def resolve_utils(data:dict):
+def resolve_utils(data:dict, lang:str):
     """
     Funzione che si occupa di risolvere un intent richiamando IntentResolver.
     """
@@ -51,7 +53,7 @@ def resolve_utils(data:dict):
         traceback.print_exc()
         return jsonify({"error": "An error occurred while resolving intent: " + str(e)}), 500
 
-    return jsonify(result)
+    return jsonify(build_message(result, build_intent(data['intent']), data['entities'], lang))
 
 @app.route('/resolve_intent', methods=['POST'])
 def resolve():
@@ -81,9 +83,8 @@ def resolve():
         #se c'è il campo message
         if 'message' in data:
             intent_manager = IntentManager()
-            intent, entities, _, _ = intent_manager.detect_intent(data["message"])
-            if entities:
-                data = {"intent": intent.value, "entities": entities}
+            intent, entities, _, lang = intent_manager.detect_intent(data["message"])
+            data = {"intent": intent.value, "entities": entities}
         else:
             #se non c'è message è probabilmente un geo-dispersion
             data = {"intent": "geodispersion", "entities": data['entities']}
@@ -91,6 +92,6 @@ def resolve():
     except:
         return jsonify({"error": "Invalid request: JSON required"}), 400
 
-    return resolve_utils(data)
+    return resolve_utils(data, lang)
 
 
