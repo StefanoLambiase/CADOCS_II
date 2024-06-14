@@ -5,11 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 function addClassActive(id, nomeClasseMainContent) {
   let attualmenteSelezionato = document.querySelectorAll(".voceMenuActive");
+
   [].forEach.call(attualmenteSelezionato, function (el) {
     el.classList.remove("voceMenuActive");
   });
+
   document.getElementById(id).classList.add("voceMenuActive");
-  // nel caso in cui clicco su una voce del menu da telefono poi nascondo il menu
 }
 
 function Menu() {
@@ -26,7 +27,17 @@ function Menu() {
           onClick={() => addClassActive(1, "contenitoreMainContent")}
         >
           <div className="voceMenu voceMenuActive" id="1">
-            <span>chatbot</span>
+            <span>Chatbot</span>
+          </div>
+        </Link>
+
+        <Link
+          to={"/"}
+          className="voceMenuText"
+          onClick={() => addClassActive(2, "contenitoreMainContent")}
+        >
+          <div className="voceMenu voceMenuActive" id="2">
+            <span>Culture Inspector</span>
           </div>
         </Link>
 

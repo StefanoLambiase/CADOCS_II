@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import AppShell from "./AppShell";
+import Menu from "./components/menu";
 
 import {
   BrowserRouter,
@@ -18,8 +19,8 @@ import menu from "./components/menu";
 const AppRoutes = () =>{
     return (
         <Routes>
-            <Route path="/" element={<AppShell> <CountrySelector/></AppShell> }/>
-            <Route path="/chatbot" element={<AppShell> <ChatbotPage/> </AppShell>}/>
+            <Route path="/" element={<AppShell> <Menu/> <CountrySelector/> </AppShell> }/>
+            <Route path="/chatbot" element={<AppShell> <Menu/><ChatbotPage/> </AppShell>}/>
         </Routes>
     )
 }
@@ -27,10 +28,11 @@ const AppRoutes = () =>{
 
 const App = () => {
   return (
-    <div className="sfondoPagina contenitorePaginaHomePage">
+    <div className="contenitorePaginaHomePage">
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
+
     </div>
   );
 };
