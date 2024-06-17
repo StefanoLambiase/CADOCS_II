@@ -1,7 +1,9 @@
 import React from "react";
 import "./menu_style.css";
 import { Link, useNavigate } from "react-router-dom";
-
+import { MdChat } from 'react-icons/md';
+import logoPath from "../images/Logo.png";
+import { MdPlace } from 'react-icons/md';
 
 function addClassActive(id, nomeClasseMainContent) {
   let attualmenteSelezionato = document.querySelectorAll(".voceMenuActive");
@@ -18,29 +20,30 @@ function Menu() {
 
   return (
     <div className="contenitoreMenu">
-      {/** <img src={logoPath} className="logoMenu" /> */}
+      { <img src={logoPath} className="logoMenu" /> }
 
-      <div className="contenitoreVociMenu" id="menu-medico">
-        <Link
-          to={"/chatbot"}
-          className="voceMenuText"
-          onClick={() => addClassActive(1, "contenitoreMainContent")}
-        >
-          <div className="voceMenu voceMenuActive" id="1">
-            <span>Chatbot</span>
-          </div>
-        </Link>
-
+      <div className="contenitoreVociMenu">
         <Link
           to={"/"}
           className="voceMenuText"
           onClick={() => addClassActive(2, "contenitoreMainContent")}
         >
           <div className="voceMenu voceMenuActive" id="2">
+                <MdPlace className="iconaMenu"/>
             <span>Culture Inspector</span>
           </div>
         </Link>
 
+        <Link
+          to={"/chatbot"}
+          className="voceMenuText"
+          onClick={() => addClassActive(1, "contenitoreMainContent")}
+        >
+          <div className="voceMenu" id="1">
+            <MdChat className="iconaMenu"/>
+            <span>Chatbot</span>
+          </div>
+        </Link>
       </div>
     </div>
   );
