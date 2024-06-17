@@ -179,7 +179,9 @@ const CountrySelector = () => {
         {errorMessage && <div className="error-message">{errorMessage}</div>}
 
         <textarea value={result} readOnly></textarea>
+        <div className="center-button-container">
         <button onClick={sendRequest} disabled={!selectedOptionMap.size || geoDistribution === null}>Compute</button>
+          </div>
       </div>
   );
 };
