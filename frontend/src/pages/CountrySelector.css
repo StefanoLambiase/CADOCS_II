@@ -1,9 +1,33 @@
+:root {
+  --primary-color: #4CAF50;  /* Green, for buttons and headers */
+  --secondary-color: #333;   /* Dark gray, for text */
+  --background-color: #f8f8f8; /* Light gray, for backgrounds */
+  --error-color: #FF6B6B;    /* Soft red for error messages */
+  --hover-color: #45a049;    /* Darker green for button hover states */
+  --font-family: 'Roboto', sans-serif;  /* Font family */
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .country-selector-page {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 90vw;
   margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
 }
 
 .custom-select {
@@ -17,22 +41,43 @@
 
 textarea {
   width: 100%;
-  height: 150px;
-  padding: 12px 20px;
+  height: 200px; /* Aumentata l'altezza per più spazio */
+  padding: 8px 12px; /* Ridotto il padding per ottimizzare lo spazio */
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: none;
   border-radius: 4px;
   background-color: #f8f8f8;
-  font-size: 16px;
+  font-size: 14px; /* Font più piccolo per più testo */
   resize: none;
   margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Aggiunta di ombra per profondità */
+  overflow-y: auto;
 }
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Aumentata ombra al focus */
+}
+
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-color);
+}
+
 
 .selected-values {
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 5px;
-  background-color: #fff;
+  border-radius: 8px; /* Maggiore arrotondamento degli angoli */
+  background-color: #fefefe; /* Colore di sfondo bianco */
   cursor: pointer;
   min-height: 30px;
   display: flex;
@@ -40,6 +85,7 @@ textarea {
   width: 100%;
   flex-wrap: wrap;
   margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Aggiunta di ombra per profondità */
 }
 
 .selected-value {
@@ -47,9 +93,9 @@ textarea {
   justify-content: space-between;
   align-items: center;
   background-color: #e9e9e9;
-  padding: 5px;
-  border-radius: 5px;
-  margin: 2px;
+  padding: 5px 10px; /* Maggiore padding per un aspetto più carino */
+  border-radius: 16px; /* Arrotondamento degli angoli maggiore */
+  margin: 4px; /* Spaziatura tra i valori selezionati */
 }
 
 .selected-value span {
@@ -57,7 +103,7 @@ textarea {
 }
 
 .remove-button {
-  background-color: red;
+  background-color: var(--error-color);
   color: white;
   border: none;
   border-radius: 50%;
@@ -67,7 +113,15 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 12px; /* Font size adjustment for better appearance */
+  line-height: 20px;
+  margin-left: 10px; /* Space between the value and the button */
 }
+
+.remove-button:hover {
+  background-color: #FF4B4B; /* Colore di sfondo rosso più scuro al passaggio del mouse */
+}
+
 
 .options {
   position: absolute;
@@ -80,15 +134,22 @@ textarea {
   border-top: none;
   border-radius: 5px;
   z-index: 1000;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: none;
+  transition: max-height 0.3s, opacity 0.3s;
 }
 
 .options.active {
   display: block;
+  max-height: 200px;
+  opacity: 1;
 }
 
 .option {
   padding: 10px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .option:hover {
@@ -109,11 +170,17 @@ textarea {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 10% auto; /* Adjusted for better visibility on screen */
   padding: 20px;
-  border-radius: 10px;
-  width: 40%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* Softer shadow */
+  width: 50%; /* Responsive width */
+  transition: transform 0.3s;
+  transform: translateY(-50px);
+}
+
+.modal-content.show {
+  transform: translateY(0);
 }
 
 .close {
@@ -131,47 +198,73 @@ textarea {
 }
 
 .geographical-question {
-  padding: 20px;
+  padding: 15px; /* Ridotto il padding per un design più compatto */
+  background-color: #ffffff; /* Sfondo bianco per contrasto */
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Aggiunta di ombra per profondità */
+  margin-top: 15px; /* Spaziatura superiore ridotta */
 }
 
 .geographical-question p {
   font-weight: bold;
-  color: #333;
-  font-size: 16px;
+  color: var(--secondary-color);
+  font-size: 16px; /* Ridotta la dimensione del font */
+  margin-bottom: 10px; /* Spaziatura inferiore ridotta */
 }
 
 .radio-buttons-container {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 5px; /* Ridotta la spaziatura superiore */
 }
 
 .radio-buttons-container label {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #666;
-  font-weight: normal;
+  margin: 5px 0; /* Ridotta la spaziatura verticale tra le etichette */
+  font-size: 14px; /* Ridotta la dimensione del font */
+  color: #555; /* Colore del testo leggermente più chiaro per migliorare il contrasto */
+  padding: 8px; /* Ridotto il padding per un design più compatto */
+  border-radius: 4px; /* Angoli arrotondati per un aspetto più morbido */
+  transition: background-color 0.3s, color 0.3s; /* Transizioni per effetto hover */
+}
+
+.radio-buttons-container label:hover {
+  background-color: var(--primary-color); /* Sfondo verde al passaggio del mouse */
+  color: white; /* Testo bianco al passaggio del mouse */
+  cursor: pointer; /* Cambio del cursore al passaggio del mouse */
+}
+
+.radio-buttons-container input[type="radio"] {
+  margin-right: 8px; /* Ridotto il margine per un design più compatto */
+  accent-color: var(--primary-color); /* Colore del radio button */
+}
+
+.radio-buttons-container input[type="radio"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--primary-color); /* Evidenziazione al focus ridotta */
 }
 
 .error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
+  color: var(--error-color);
+  font-size: 12px; /* Ridotta la dimensione del font */
+  margin-top: 8px; /* Ridotta la spaziatura superiore */
+  font-weight: bold; /* Testo in grassetto per maggiore visibilità */
 }
 
+
+
 button {
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
   color: white;
-  padding: 10px 20px;
-  margin-top: 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 20px;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: var(--hover-color);
 }
 
 button:disabled {
@@ -210,9 +303,11 @@ button:disabled {
 
 h2 {
   text-align: center;
-  color: #4CAF50;
+  color: var(--primary-color);
+  font-family: var(--font-family);
 }
 
 h2.modal-header {
-  color: #333;
+  color: var(--secondary-color);
+  font-family: var(--font-family);
 }
