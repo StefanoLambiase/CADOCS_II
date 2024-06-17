@@ -150,8 +150,8 @@ const CountrySelector = () => {
                   <span>{participants} participants</span>
                 </div>
                 <div className="modal-buttons">
-                  <button className="cancel-button" onClick={() => setIsModalVisible(false)}>Cancel</button>
-                  <button className="ok-button" onClick={handleSelect}>OK</button>
+                  <button className="cancel-button compute-button" onClick={() => setIsModalVisible(false)}>Cancel</button>
+                  <button className="ok-button compute-button" onClick={handleSelect}>OK</button>
                 </div>
               </div>
             </div>
@@ -180,8 +180,8 @@ const CountrySelector = () => {
 
         <textarea value={result} readOnly></textarea>
         <div className="center-button-container">
-        <button onClick={sendRequest} disabled={!selectedOptionMap.size || geoDistribution === null}>Compute</button>
-          </div>
+          <button className="compute-button" onClick={sendRequest} disabled={!selectedOptionMap.size || geoDistribution === null}>Compute</button>
+        </div>
       </div>
   );
 };
