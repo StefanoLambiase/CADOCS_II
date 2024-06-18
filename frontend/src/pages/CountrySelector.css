@@ -31,7 +31,6 @@ body {
 }
 
 
-
 .custom-select {
   position: relative;
   width: 500px;
@@ -86,6 +85,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   min-width: 100px;
   width: 100%;
   flex-wrap: wrap;
+  font-family: "Questrial", sans-serif;
   margin-top: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Aggiunta di ombra per profondità */
 }
@@ -99,6 +99,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   padding: 5px 10px; /* Maggiore padding per un aspetto più carino */
   border-radius: 16px; /* Arrotondamento degli angoli maggiore */
   margin: 4px; /* Spaziatura tra i valori selezionati */
+  font-family: "Questrial", sans-serif;
 }
 
 .selected-value span {
@@ -190,6 +191,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  font-family: "Questrial", sans-serif;
 }
 
 .close:hover,
@@ -212,6 +214,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   color: var(--secondary-color);
   font-size: 16px; /* Ridotta la dimensione del font */
   margin-bottom: 10px; /* Spaziatura inferiore ridotta */
+  font-family: "Questrial", sans-serif;
 }
 
 .radio-buttons-container {
@@ -227,6 +230,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   padding: 8px; /* Ridotto il padding per un design più compatto */
   border-radius: 4px; /* Angoli arrotondati per un aspetto più morbido */
   transition: background-color 0.3s, color 0.3s; /* Transizioni per effetto hover */
+  font-family: "Questrial", sans-serif;
 }
 
 .radio-buttons-container label:hover {
@@ -250,6 +254,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   font-size: 12px; /* Ridotta la dimensione del font */
   margin-top: 8px; /* Ridotta la spaziatura superiore */
   font-weight: bold; /* Testo in grassetto per maggiore visibilità */
+  font-family: "Questrial", sans-serif;
 }
 
 
@@ -294,6 +299,7 @@ button:disabled {
 
 .modal-input label {
   font-size: 16px;
+  font-family: "Questrial", sans-serif;
 }
 
 .modal-input input {
@@ -302,6 +308,7 @@ button:disabled {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-family: "Questrial", sans-serif;
 }
 
 .modal-buttons {
@@ -317,10 +324,10 @@ button:disabled {
 h2 {
   text-align: center;
   color: var(--primary-color);
-  font-family: var(--font-family);
+  font-family: "Questrial", sans-serif;
 }
 
 h2.modal-header {
   color: var(--secondary-color);
-  font-family: var(--font-family);
+  font-family: "Questrial", sans-serif;
 }

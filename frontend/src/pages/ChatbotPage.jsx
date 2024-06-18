@@ -61,12 +61,6 @@ const ChatbotPage = () => {
 
   return (
     <div className="chatbot-page">
-      <div className="header">
-        <div className="logo">
-          {/* Inserisci il logo qui */}
-        </div>
-        <div className="title">CADOCS II</div>
-      </div>
       <div className="message-container">
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender}`}>
