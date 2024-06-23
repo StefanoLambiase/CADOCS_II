@@ -178,7 +178,7 @@ const CountrySelector = () => {
 
         {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-        <textarea value={result} readOnly></textarea>
+        <textarea value={result} readOnly></textarea> {/**Aggiungi classe per nasconderla quanod non hai i risultati*/}
         <div className="center-button-container">
           <button className="compute-button" onClick={sendRequest} disabled={!selectedOptionMap.size || geoDistribution === null}>Compute</button>
         </div>
