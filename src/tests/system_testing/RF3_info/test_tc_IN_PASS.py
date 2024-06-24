@@ -40,5 +40,5 @@ class TestTCINPASS():
     # 8 | mouseOut | css=button | 
     element = self.driver.find_element(By.CSS_SELECTOR, "body")
     actions = ActionChains(self.driver)
-    actions.move_to_element(element, 0, 0).perform()
+    actions.move_to_element(element).perform()
   
