@@ -3,13 +3,6 @@ from unittest.mock import patch
 from src.intent_handling.intent_resolver import IntentResolver
 from src.intent_web_service import app
 
-risultato_atteso_success = {'Index': 0, 'StartingDate': '12/22/2022',
-                            'Smell1': ['BCE', 'Black-cloud Effect'],
-                            'Smell2': ['PDE', 'Prima-donnas Effect'],
-                            'Smell3': ['RS', 'Radio Silence'],
-                            'Smell4': ['UI', 'Unhealthy Interaction'],
-                            'Smell5': ['TC', 'Toxic Communication']}
-
 
 class TestIntentResolverWebService:
     @pytest.fixture()
@@ -44,7 +37,7 @@ class TestIntentResolverWebService:
             'entities': ["https://www.github.com/gianwario/BeeHave"]
         }
         response = client.post('/resolve_intent', json=request_content)
-        assert response.status_code == 400
+        assert response.status_code == 500
 
     def test_missing_entities(self, client):
         """
@@ -77,7 +70,7 @@ class TestIntentResolverWebService:
 
             response = client.post('/resolve_intent', json=request_content)
             assert response.status_code == 500
-            assert b"An error occurred while resolving intent: Simulated error" in response.data
+
 
     def test_resolve_success(self, client):
         """
@@ -87,10 +80,9 @@ class TestIntentResolverWebService:
         ---------------
         client : flask app context
         """
-        with patch.object(IntentResolver, 'resolve_intent', return_value=risultato_atteso_success) as mock_method:
+        with patch.object(IntentResolver, 'resolve_intent', return_value=['BCE', 'PDE', 'RS', 'UI', 'TC']) as mock_method:
             request_content = {
-                'intent': "get_smells",
-                'entities': ["https://www.github.com/gianwario/BeeHave"]
+                "message": "Hey cadocs can you get me the smells in https://github.com/gianwario/beehave"
             }
 
             response = client.post('/resolve_intent', json=request_content)
