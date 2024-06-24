@@ -11,7 +11,7 @@ from src.service.cadocs_messages import build_message
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 def build_intent(intent_value: str) -> CadocsIntents:
     """
