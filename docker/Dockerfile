@@ -51,13 +51,13 @@ RUN echo "import nltk;" > nltk_setup.py \
     && python3.8 nltk_setup.py
 
 
-ENV PAT=
+ENV PAT='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'
 ENV CSDETECTOR_URL_GETSMELLS='http://127.0.0.1:5001/getSmells'
-ENV CLIENT_ID=
+ENV CLIENT_ID = "38e697880ed3c4e0f735"
 ENV GEODISPERSION_URL='http://127.0.0.1:5004/compute_std_dev'
 
 # Copia lo script nel container
-COPY run.sh /app/run.sh
+COPY /run.sh /app/run.sh
 
 # Rende lo script eseguibile
 RUN chmod +x /app/run.sh

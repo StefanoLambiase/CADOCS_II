@@ -5,13 +5,13 @@ from flask import Flask, json, jsonify, redirect, request, make_response, url_fo
 from src.intent_handling.cadocs_intent import CadocsIntents
 from src.intent_handling.intent_resolver import IntentResolver
 from src.chatbot.intent_manager import IntentManager
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from src.service.cadocs_messages import build_message
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
-CORS(app)
 
 def build_intent(intent_value: str) -> CadocsIntents:
     """
@@ -37,11 +37,12 @@ def build_intent(intent_value: str) -> CadocsIntents:
 
     raise ValueError(f"Unknown intent: {intent_value}")
 
-def resolve_utils(data:dict, lang:str):
+
+def resolve_utils(data: dict, lang: str):
     """
     Funzione che si occupa di risolvere un intent richiamando IntentResolver.
     """
-    #se c'è il campo message
+    # se c'è il campo message
     if 'intent' not in data or 'entities' not in data:
         return jsonify({"error": "Invalid request: 'intent' and 'entities' fields required"}), 400
 
@@ -55,7 +56,9 @@ def resolve_utils(data:dict, lang:str):
 
     return jsonify(build_message(result, build_intent(data['intent']), data['entities'], lang))
 
+
 @app.route('/resolve_intent', methods=['POST'])
+@cross_origin()
 def resolve():
     """
     Funzione che si occupa di risolvere un intent richiamando IntentResolver.
@@ -76,22 +79,22 @@ def resolve():
     -----------
     json: risultato dell'analisi del messaggio
     """
-    
+
     try:
         data = request.get_json()
-        
-        #se c'è il campo message
+
+        # se c'è il campo message
         if 'message' in data:
             intent_manager = IntentManager()
             intent, entities, _, lang = intent_manager.detect_intent(data["message"])
             data = {"intent": intent.value, "entities": entities}
         else:
-            #se non c'è message è probabilmente un geo-dispersion
+            # se non c'è message è probabilmente un geo-dispersion
             data = {"intent": "geodispersion", "entities": data['entities']}
-        
+
     except:
         return jsonify({"error": "Invalid request: JSON required"}), 400
 
+    print("STO PROCESSANDO RISPOSTA...")
+
     return resolve_utils(data, lang)
-
-

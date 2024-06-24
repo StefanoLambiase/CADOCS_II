@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: guido_backend
+    restart: always
+    image: guido-backend:1.0
+    build:
+      context: ../src
+      dockerfile: ../docker/Dockerfile
+    ports:
+      - "5005:5005"
+    networks:
+      - shared-network
+
+  frontend:
+    container_name: guido_frontend
+    restart: unless-stopped
+    image: guido-frontend:1.0
+    build:
+      context: ../frontend
+      dockerfile: ../frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    driver: bridge
