@@ -8,18 +8,21 @@
 }
 
 .country-selector-page {
-  flex-direction: column;
-  height: 100vh;
   display: flex;
-  width: 85%;
-  background-color: white;
+  flex-direction: column;
   align-items: center;
+  width: 85%;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow for depth */
+  border-radius: 10px;
 }
-
 
 .custom-select {
   position: relative;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,23 +32,23 @@
 
 textarea {
   width: 100%;
-  height: 200px; /* Aumentata l'altezza per più spazio */
-  padding: 8px 12px; /* Ridotto il padding per ottimizzare lo spazio */
+  height: 200px; /* Increased height for more space */
+  padding: 8px 12px; /* Reduced padding to optimize space */
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
   background-color: #f8f8f8;
-  margin-bottom: 100px;
-  font-size: 14px; /* Font più piccolo per più testo */
-  resize: none;
   margin-top: 30px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Aggiunta di ombra per profondità */
+  margin-bottom: 20px;
+  font-size: 14px; /* Smaller font for more text */
+  resize: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added shadow for depth */
   overflow-y: auto;
 }
 
 textarea:focus {
   outline: none;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Aumentata ombra al focus */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Increased shadow on focus */
 }
 
 textarea::-webkit-scrollbar {
@@ -64,28 +67,25 @@ textarea::-webkit-scrollbar-thumb:hover {
 .selected-values {
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 8px; /* Maggiore arrotondamento degli angoli */
-  background-color: #fefefe; /* Colore di sfondo bianco */
+  border-radius: 8px; /* Greater rounding of corners */
+  background-color: #fefefe; /* White background color */
   cursor: pointer;
   min-height: 30px;
   display: flex;
-  min-width: 100px;
   width: 100%;
   flex-wrap: wrap;
   font-family: "Questrial", sans-serif;
   margin-top: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Aggiunta di ombra per profondità */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added shadow for depth */
 }
 
 .selected-value {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   background-color: #e9e9e9;
-  padding: 5px 10px; /* Maggiore padding per un aspetto più carino */
-  border-radius: 16px; /* Arrotondamento degli angoli maggiore */
-  margin: 4px; /* Spaziatura tra i valori selezionati */
+  padding: 5px 10px; /* Increased padding for a nicer look */
+  border-radius: 16px; /* Greater rounding of corners */
+  margin: 4px; /* Spacing between selected values */
   font-family: "Questrial", sans-serif;
 }
 
@@ -110,7 +110,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 .remove-button:hover {
-  background-color: #FF4B4B; /* Colore di sfondo rosso più scuro al passaggio del mouse */
+  background-color: #FF4B4B; /* Darker red background on hover */
 }
 
 .options {
@@ -173,115 +173,6 @@ textarea::-webkit-scrollbar-thumb:hover {
   transform: translateY(0);
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  font-family: "Questrial", sans-serif;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.geographical-question {
-  padding: 15px; /* Ridotto il padding per un design più compatto */
-  background-color: #ffffff; /* Sfondo bianco per contrasto */
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Aggiunta di ombra per profondità */
-}
-
-.geographical-question p {
-  font-weight: bold;
-  color: var(--secondary-color);
-  font-size: 16px; /* Ridotta la dimensione del font */
-  margin-bottom: 10px; /* Spaziatura inferiore ridotta */
-  font-family: "Questrial", sans-serif;
-}
-
-.radio-buttons-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px; /* Ridotta la spaziatura superiore */
-}
-
-.radio-buttons-container label {
-  margin: 5px 0; /* Ridotta la spaziatura verticale tra le etichette */
-  font-size: 14px; /* Ridotta la dimensione del font */
-  color: #555; /* Colore del testo leggermente più chiaro per migliorare il contrasto */
-  padding: 8px; /* Ridotto il padding per un design più compatto */
-  border-radius: 4px; /* Angoli arrotondati per un aspetto più morbido */
-  transition: background-color 0.3s, color 0.3s; /* Transizioni per effetto hover */
-  font-family: "Questrial", sans-serif;
-}
-
-.radio-buttons-container label:hover {
-  background-color: var(--primary-color); /* Sfondo verde al passaggio del mouse */
-  color: white; /* Testo bianco al passaggio del mouse */
-  cursor: pointer; /* Cambio del cursore al passaggio del mouse */
-}
-
-.radio-buttons-container input[type="radio"] {
-  margin-right: 8px; /* Ridotto il margine per un design più compatto */
-  accent-color: var(--primary-color); /* Colore del radio button */
-}
-
-.radio-buttons-container input[type="radio"]:focus {
-  outline: none;
-  box-shadow: 0 0 0 1px var(--primary-color); /* Evidenziazione al focus ridotta */
-}
-
-.error-message {
-  color: var(--error-color);
-  font-size: 12px; /* Ridotta la dimensione del font */
-  margin-top: 8px; /* Ridotta la spaziatura superiore */
-  font-weight: bold; /* Testo in grassetto per maggiore visibilità */
-  font-family: "Questrial", sans-serif;
-}
-
-
-.center-button-container {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: 10px; /* Distanza dal fondo della pagina */
-}
-
-.text-area-results {
-  visibility: hidden;
-}
-
-.active-class {
-  visibility: visible;
-}
-
-.compute-button {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 10px; /* Padding uniforme per rendere il bottone più simile a un quadrato */
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 20px;
-  width: 100px; /* Impostazione della larghezza per mantenere la forma quadrata */
-  height: 50px; /* Impostazione dell'altezza per mantenere la forma quadrata */
-
-}
-
-button:hover {
-  background-color: var(--hover-color);
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
 .modal-input {
   display: flex;
   align-items: center;
@@ -324,3 +215,166 @@ h2.modal-header {
   font-family: "Questrial", sans-serif;
 }
 
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: "Questrial", sans-serif;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.geographical-question {
+  padding: 15px; /* Reduced padding for a more compact design */
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added shadow for depth */
+  width: 100%;
+  max-width: 1000px
+}
+
+.geographical-question p {
+  font-weight: bold;
+  color: var(--secondary-color);
+  font-size: 16px; /* Reduced font size */
+  margin-bottom: 10px; /* Reduced bottom spacing */
+  font-family: "Questrial", sans-serif;
+}
+
+.radio-buttons-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px; /* Reduced top spacing */
+}
+
+.radio-buttons-container label {
+  margin: 5px 0; /* Reduced vertical spacing between labels */
+  font-size: 14px; /* Reduced font size */
+  color: #555; /* Slightly lighter text color for better contrast */
+  padding: 8px; /* Reduced padding for a more compact design */
+  border-radius: 4px; /* Rounded corners for a softer look */
+  transition: background-color 0.3s, color 0.3s; /* Transitions for hover effect */
+  font-family: "Questrial", sans-serif;
+}
+
+.radio-buttons-container label:hover {
+  background-color: var(--primary-color); /* Green background on hover */
+  color: white; /* White text on hover */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.radio-buttons-container input[type="radio"] {
+  margin-right: 8px; /* Reduced margin for a more compact design */
+  accent-color: var(--primary-color); /* Color of the radio button */
+}
+
+.radio-buttons-container input[type="radio"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--primary-color); /* Reduced focus highlight */
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 12px; /* Reduced font size */
+  margin-top: 8px; /* Reduced top spacing */
+  font-weight: bold; /* Bold text for better visibility */
+  font-family: "Questrial", sans-serif;
+}
+
+.center-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjusted for consistent spacing */
+}
+
+.compute-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.compute-button:hover {
+  background-color: var(--hover-color);
+}
+
+.compute-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+h2.modal-header {
+  color: var(--secondary-color);
+}
+
+.results-container {
+  width: 80%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Added margin-bottom to separate from other content */
+}
+
+/* Additional styles for the ResultDisplay component */
+.result-display {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fefefe;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.result-display h3 {
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-family: 'Questrial', sans-serif;
+}
+
+.result-display textarea {
+  width: 100%;
+  height: 100px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 14px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.result-display textarea:focus {
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.result-display textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.result-display textarea::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+.result-display textarea::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-color);
+}
