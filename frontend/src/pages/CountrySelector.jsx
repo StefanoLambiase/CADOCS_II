@@ -100,7 +100,7 @@ const CountrySelector = () => {
       }));
     mappedArray.push({ "geographical_dispersion": geoDistribution });
 
-    fetch("http://127.0.0.1:5004/compute_std_dev", { // to do change the url to cadocs
+    fetch("http://127.0.0.1:5005/resolve_intent", { // to do change the url to cadocs
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(mappedArray)
