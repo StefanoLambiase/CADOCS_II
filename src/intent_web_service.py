@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 from src.service.cadocs_messages import build_message
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 def build_intent(intent_value: str) -> CadocsIntents:
@@ -91,6 +91,7 @@ def resolve():
         else:
             # se non c'è message è probabilmente un geo-dispersion
             data = {"intent": "geodispersion", "entities": data['entities']}
+            lang = " "
 
     except:
         return jsonify({"error": "Invalid request: JSON required"}), 400

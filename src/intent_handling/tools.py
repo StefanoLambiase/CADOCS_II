@@ -42,24 +42,7 @@ class CsDetectorTool(Tool):
         return results
 
 
-def check_list_format(lst: List) -> bool:
-    """
-        Checks if the provided data list is formatted correctly according to the expected structure.
 
-        :param lst: List of dictionaries where each dictionary is built like this:
-                    {"number": 1000, "nationality": "Germany"}
-        :return: True if the data list is formatted correctly, False otherwise.
-        """
-    # Check if the list is empty
-    if not lst:
-        return False
-
-    # Controlla se ogni elemento della lista è un dizionario con le chiavi 'number' e 'nationality'
-    for item in lst:
-        if not isinstance(item, dict) or 'number' not in item or 'nationality' not in item:
-            return False
-
-    return True
 
 
 class CultureInspectorTool(Tool):
@@ -93,13 +76,10 @@ class CultureInspectorTool(Tool):
                 or if the data is not formatted correctly:
                 ["the list of developers is not well formed", code = "500"]
         """
-        if check_list_format(data):
-            req = requests.post(os.environ.get('GEODISPERSION_URL'), json=data)
-            result = req.json()
-        else:
-            error_text = "the list of developers is not well formed"
-            code = "500"
-            result = [error_text, code]
+
+        req = requests.post(os.environ.get('GEODISPERSION_URL'), json=data)
+        result = req.json()
+
 
         return result
 

@@ -145,6 +145,10 @@ def build_error_message(lang):
 
     return text
 
+
+
+
+
 # this function will format the message basing on the intent
 def build_message(results, intent, entities, lang):
     
@@ -156,4 +160,10 @@ def build_message(results, intent, entities, lang):
         return response
     elif intent == CadocsIntents.Info:
         response = build_info_message(lang)
+        return response
+    elif intent ==CadocsIntents.Geodispersion:
+        response = results
+        return response
+    else:
+        response = build_error_message(lang)
         return response
