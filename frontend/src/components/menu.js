@@ -2,7 +2,7 @@ import React from "react";
 import "./menu_style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { MdChat } from 'react-icons/md';
-import logoPath from "../images/Logo.png";
+import logoPath from "../images/GUIDO_logo.svg";
 import { MdPlace } from 'react-icons/md';
 
 function addClassActive(id, nomeClasseMainContent) {
