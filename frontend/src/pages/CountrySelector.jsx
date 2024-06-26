@@ -86,6 +86,11 @@ const CountrySelector = () => {
   };
 
   const sendRequest = () => {
+    // trova elemento con classe .country-selector-page
+    let attualmenteSelezionato = document.querySelectorAll(".country-selector-page");
+    // aggiungi la classe expand-page
+    attualmenteSelezionato[0].classList.add("expand_page");
+
     if (!selectedOptionMap.size || geoDistribution === null) {
       setErrorMessage('Please select at least one country and a geographical dispersion option.');
       return;
