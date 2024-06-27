@@ -1,9 +1,9 @@
 :root {
-  --primary-color: #4CAF50;  /* Green, for buttons and headers */
+  --primary-color: #00979B;  /* Green, for buttons and headers */
   --secondary-color: #333;   /* Dark gray, for text */
   --background-color: #f8f8f8; /* Light gray, for backgrounds */
   --error-color: #FF6B6B;    /* Soft red for error messages */
-  --hover-color: #45a049;    /* Darker green for button hover states */
+  --hover-color: #00979B;    /* Darker green for button hover states */
   --font-family: 'Roboto', sans-serif;  /* Font family */
 }
 
