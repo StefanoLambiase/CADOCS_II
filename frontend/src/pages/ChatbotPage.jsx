@@ -11,7 +11,7 @@ const ChatbotPage = () => {
 
   useEffect(() => {
     // Messaggio di benvenuto del bot
-    const welcomeMessage = "Hello! 👋<br> I'm Cadocs, your virtual assistant. I'm here to help you identify 'community smells' and improve team collaboration. If you have any questions or need assistance, feel free to ask!<br><br> 😊Ciao! 👋<br> Sono Cadocs, il tuo assistente virtuale. Sono qui per aiutarti a individuare i 'community smells' e migliorare la collaborazione nel tuo team. Se hai domande o hai bisogno di assistenza, chiedimi pure!";
+    const welcomeMessage = "Hello! 👋<br> I'm Cadocs, your virtual assistant. I'm here to help you identify 'community smells' and improve team collaboration. If you have any questions or need assistance, feel free to ask!<br><br>Ciao! 👋<br> Sono Cadocs, il tuo assistente virtuale. Sono qui per aiutarti a individuare i 'community smells' e migliorare la collaborazione nel tuo team. Se hai domande o hai bisogno di assistenza, chiedimi pure!";
     setLoading(true);
 
     // Simulazione di un breve ritardo per il messaggio di benvenuto
