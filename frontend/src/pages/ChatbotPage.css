@@ -64,4 +64,22 @@
   .user-input button:hover {
     background-color: #0056b3;
   }
+
+
+  /* Caricamento */
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+}
+
+.loading-message span {
+  margin-left: 10px;
+  font-size: 24px;
+}
+
   
