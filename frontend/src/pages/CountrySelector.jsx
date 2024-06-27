@@ -32,6 +32,7 @@ const CountrySelector = () => {
   const [results, setResults] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
   const optionsRef = useRef(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const openModal = (countryName) => {
     setCurrentCountry(countryName);
@@ -55,6 +56,7 @@ const CountrySelector = () => {
   const handleOutsideClick = (event) => {
     if (optionsRef.current && !optionsRef.current.contains(event.target)) {
       setIsOptionsVisible(false);
+      setSearchTerm('');
     }
   };
 
@@ -133,40 +135,73 @@ const CountrySelector = () => {
     setErrorMessage('');
   };
 
+  const handleKeyDown = (event) => {
+    if (isOptionsVisible) {
+      const key = event.key.toLowerCase();
+
+      if (key === 'enter' && searchTerm) {
+        const matchingCountry = countries.find(country => country.toLowerCase() === searchTerm.toLowerCase());
+        if (matchingCountry) {
+          openModal(matchingCountry);
+        }
+      } else if (key === 'backspace') {
+        setSearchTerm(prev => prev.slice(0, -1));
+      } else if (/^[a-z]$/i.test(key)) { // Only add valid letter keys to the search term
+        setSearchTerm(prev => prev + key);
+        const firstCountry = countries.find(country => country.toLowerCase().startsWith(searchTerm + key));
+        if (firstCountry) {
+          const optionElement = document.getElementById(firstCountry);
+          if (optionElement) {
+            optionElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      }
+    }
+  };
   return (
     <div className="country-selector-page">
       <div className="header-country">
-      <h2>Country Selector</h2>
-        </div>
-      <div className="custom-select" onClick={() => setIsOptionsVisible(!isOptionsVisible)} ref={optionsRef}>
+        <h2>Country Selector</h2>
+      </div>
+      <div
+        className="custom-select"
+        onClick={() => setIsOptionsVisible(!isOptionsVisible)}
+        ref={optionsRef}
+        onKeyDown={handleKeyDown}
+        tabIndex="0"
+      >
         <div className="selected-values">
           {Array.from(selectedOptionMap.entries()).map(([country, number]) => (
-              <div key={country} className="selected-value">
-                <span>{country} ({number})</span>
-                <button className="remove-button" onClick={(e) => {
-                  e.stopPropagation();
-                  removeSelectedOption(country);
-                }}>
-                </button>
-              </div>
+            <div key={country} className="selected-value">
+              <span>{country} ({number})</span>
+              <button className="remove-button" onClick={(e) => {
+                e.stopPropagation();
+                removeSelectedOption(country);
+              }}>
+              </button>
+            </div>
           ))}
           {!selectedOptionMap.size && 'Select countries'}
         </div>
         {isOptionsVisible && (
-            <div className={`options ${isOptionsVisible ? 'active' : ''}`}>
-              {countries.map(country => (
-                  <div key={country} className="option"
-                       onClick={() => selectedOptionMap.has(country) ? removeSelectedOption(country) : openModal(country)}>
-                    {country}
-                  </div>
-              ))}
-            </div>
+          <div className={`options ${isOptionsVisible ? 'active' : ''}`}>
+            {countries.map(country => (
+              <div
+                key={country}
+                id={country}
+                className="option"
+                onClick={() => selectedOptionMap.has(country) ? removeSelectedOption(country) : openModal(country)}
+              >
+                {country}
+              </div>
+            ))}
+          </div>
         )}
         <button className="reset-button" onClick={resetPage}>Reset</button>
       </div>
 
       {isModalVisible && (
-          <div className="modal" style={{ display: 'block' }}>
+        <div className="modal" style={{display: 'block'}}>
           <div className="modal-content">
             <span className="close" onClick={() => setIsModalVisible(false)}>&times;</span>
             <h2 className="modal-header">Select number of participants</h2>
@@ -192,22 +227,15 @@ const CountrySelector = () => {
 
       <div className="content-wrapper">
         <div className="geographical-question">
-          <p>Is your team or development community geographically distributed (i.e., do its participants work from
-            different locations scattered around the globe)?</p>
+          <p>Is your team or development community geographically distributed (i.e., do its participants work from different locations scattered around the globe)?</p>
           <div className="radio-buttons-container">
-            <label><input type="radio" name="geoDistribution" value="100" onChange={() => setGeoDistribution(100)} /> All members of the community work from
-              different parts of the globe.</label>
-            <label><input type="radio" name="geoDistribution" value="75" onChange={() => setGeoDistribution(75)} /> Almost all (about 75%) members of the
-              community work from different parts of the globe.</label>
-            <label><input type="radio" name="geoDistribution" value="50" onChange={() => setGeoDistribution(50)} /> Most (about 50%) of the members of the
-              community work from different parts of the globe.</label>
-            <label><input type="radio" name="geoDistribution" value="25" onChange={() => setGeoDistribution(25)} /> A small portion (about 25%) of the members
-              of the community work from different parts of the globe.</label>
-            <label><input type="radio" name="geoDistribution" value="0" onChange={() => setGeoDistribution(0)} /> All members of the community work in the
-              same location.</label>
+            <label><input type="radio" name="geoDistribution" value="100" onChange={() => setGeoDistribution(100)} /> All members of the community work from different parts of the globe.</label>
+            <label><input type="radio" name="geoDistribution" value="75" onChange={() => setGeoDistribution(75)} /> Almost all (about 75%) members of the community work from different parts of the globe.</label>
+            <label><input type="radio" name="geoDistribution" value="50" onChange={() => setGeoDistribution(50)} /> Most (about 50%) of the members of the community work from different parts of the globe.</label>
+            <label><input type="radio" name="geoDistribution" value="25" onChange={() => setGeoDistribution(25)} /> A small portion (about 25%) of the members of the community work from different parts of the globe.</label>
+            <label><input type="radio" name="geoDistribution" value="0" onChange={() => setGeoDistribution(0)} /> All members of the community work in the same location.</label>
           </div>
         </div>
-
       </div>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
@@ -228,11 +256,8 @@ const CountrySelector = () => {
         <button className="compute-button" onClick={sendRequest}
                 disabled={!selectedOptionMap.size || geoDistribution === null}>Compute
         </button>
-
-
       </div>
     </div>
   );
 };
-
 export default CountrySelector;
