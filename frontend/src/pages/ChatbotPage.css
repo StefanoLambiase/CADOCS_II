@@ -65,7 +65,18 @@
     background-color: #0056b3;
   }
 
-
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #00979B;
+  color: white;
+}
+.chatbot-logo {
+  width: 35px;
+  height: auto;
+}
   /* Caricamento */
 .loading-message {
   display: flex;

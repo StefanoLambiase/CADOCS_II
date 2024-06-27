@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatbotPage.css';
+import logoPath from "../images/bot.png";
 
 const ChatbotPage = () => {
   const [messages, setMessages] = useState([]);
@@ -108,7 +109,10 @@ const ChatbotPage = () => {
 
   return (
     <div className="chatbot-page">
-      <div className="title">Chatbot</div>
+      <div className='chatbot-header'>
+        <img className="chatbot-logo" src={logoPath} alt='Avatar' />
+        <div className='chatbot-name'>CADOCS</div>
+      </div>
       <div className="message-container">
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.type}`}>
