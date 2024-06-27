@@ -32,36 +32,33 @@ The complete list of detectable community smells—through the use of csDetector
 | Unhealthy Interaction | Long delays in stakeholder communications cause slow, light and brief conversations and discussions. | NA | 
 | Toxic Communication | Toxic interactions and conflicting opinions among developers could push them to leave the project. | NA |
 
-## How to Install CADOCS II:
+## How to Install The Tool:
 
 There are several ways to install the tool. We discuss them individually below.
 
-## 1) Intallation locally
-### Requirements:
+### Docker Image pull ARM64
+1. Run the following command:
+   ```bash
+   docker pull leopoldotodisco/guido-backend:1.0
+2. Run the command: 
+    ```bash 
+    docker pull leopoldotodisco/guido-frontend:1.0
+3. Configure and start backend container backend via Docker Desktop:
+	- Open Docker Desktop.
+	- Go in section “Images”.
+	- find the image leopoldotodisco/guido-backend:1.0 and click on Play button.
+	- In *additional options*, add PAT in Env Variables.
+	- Set 5005 as port number.
+4. Configure and start backend container backend via Docker Desktop:
+	- In Docker Desktop, Go in section “Images”.
+	- find the image leopoldotodisco/guido-frontens:1.0 and click on Play button.
+	- Set 3000 as port number.
+5. Start you brand new containers
 
-- Windows 10
-
-- Python 3.11.*
-
-### Process:
-
-1) Clone the current repository on your system
-
-2) The tool require some additional modules to be installed that are listed in the requirements.txt file
-
-3) Run file *ToolGui*
-
-## 1) Standalone Usage
-### Requirements:
-
-- Windows 10
-
-- Python 3.11.*
-
-### Process:
-
-1) Clone the current repository on your system
-
-2) In the repository find the *toolGui.exe* file which contains the tool ready to run without any installation
-
-3) Run *toolGui.exe* .
+### Local Docker Build
+1. Clone our Repository
+2. Go in folder "docker" and add your PAT in dockerfile
+3. Run the following commands:
+ ```bash
+    docker-compose build
+    docker compose up
