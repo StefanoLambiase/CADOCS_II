@@ -7,6 +7,10 @@
   --font-family: 'Roboto', sans-serif;  /* Font family */
 }
 
+.header-country{
+  margin-top: 50px;
+}
+
 .country-selector-page {
   display: flex;
   flex-direction: column;
@@ -22,10 +26,11 @@
 
 .custom-select {
   position: relative;
-  width: 100%;
+  width: 85%;
   max-width: 500px;
   display: flex;
-  flex-direction: column;
+  gap: 10px;
+  flex-direction: row;
   align-items: center;
   margin: 70px;
   color: black;
@@ -134,6 +139,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 .options.active {
   display: block;
   max-height: 200px;
+  width: 81%;
   opacity: 1;
 }
 
@@ -313,6 +319,19 @@ h2.modal-header {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.reset-button {
+  background-color: var(--primary-color);
+  color: white;
+  margin-top:10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
 
 h2 {
   text-align: center;

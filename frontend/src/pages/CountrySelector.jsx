@@ -121,37 +121,52 @@ const CountrySelector = () => {
     })
   };
 
+
+  const resetPage = () => {
+    setSelectedOptionMap(new Map());
+    setIsOptionsVisible(false);
+    setIsModalVisible(false);
+    setCurrentCountry('');
+    setParticipants(1);
+    setGeoDistribution(null);
+    setResults({});
+    setErrorMessage('');
+  };
+
   return (
     <div className="country-selector-page">
+      <div className="header-country">
+      <h2>Country Selector</h2>
+        </div>
       <div className="custom-select" onClick={() => setIsOptionsVisible(!isOptionsVisible)} ref={optionsRef}>
-        <h2>Country Selector</h2>
         <div className="selected-values">
           {Array.from(selectedOptionMap.entries()).map(([country, number]) => (
-            <div key={country} className="selected-value">
-              <span>{country} ({number})</span>
-              <button className="remove-button" onClick={(e) => {
-                e.stopPropagation();
-                removeSelectedOption(country);
-              }}>x
-              </button>
-            </div>
+              <div key={country} className="selected-value">
+                <span>{country} ({number})</span>
+                <button className="remove-button" onClick={(e) => {
+                  e.stopPropagation();
+                  removeSelectedOption(country);
+                }}>
+                </button>
+              </div>
           ))}
           {!selectedOptionMap.size && 'Select countries'}
         </div>
         {isOptionsVisible && (
-          <div className={`options ${isOptionsVisible ? 'active' : ''}`}>
-            {countries.map(country => (
-              <div key={country} className="option"
-                onClick={() => selectedOptionMap.has(country) ? removeSelectedOption(country) : openModal(country)}>
-                {country}
-              </div>
-            ))}
-          </div>
+            <div className={`options ${isOptionsVisible ? 'active' : ''}`}>
+              {countries.map(country => (
+                  <div key={country} className="option"
+                       onClick={() => selectedOptionMap.has(country) ? removeSelectedOption(country) : openModal(country)}>
+                    {country}
+                  </div>
+              ))}
+            </div>
         )}
+        <button className="reset-button" onClick={resetPage}>Reset</button>
       </div>
 
       {isModalVisible && (
-        <div className="modal" style={{ display: 'block' }}>
+          <div className="modal" style={{ display: 'block' }}>
           <div className="modal-content">
             <span className="close" onClick={() => setIsModalVisible(false)}>&times;</span>
             <h2 className="modal-header">Select number of participants</h2>
@@ -192,6 +207,7 @@ const CountrySelector = () => {
               same location.</label>
           </div>
         </div>
+
       </div>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
@@ -209,7 +225,11 @@ const CountrySelector = () => {
       </div>
 
       <div className="center-button-container">
-        <button className="compute-button" onClick={sendRequest} disabled={!selectedOptionMap.size || geoDistribution === null}>Compute</button>
+        <button className="compute-button" onClick={sendRequest}
+                disabled={!selectedOptionMap.size || geoDistribution === null}>Compute
+        </button>
+
+
       </div>
     </div>
   );
