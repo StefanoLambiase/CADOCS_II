@@ -1,10 +1,14 @@
 import pytest
 from src.intent_handling.tools import CultureInspectorTool
-
+from dotenv import load_dotenv, find_dotenv
 class TestCultureInspectorIntegration:
     @pytest.fixture()
     def setUp(self):
         inspector = CultureInspectorTool()
+        #load environment variables
+        #se non c'è il file .env nella cartella src, il test fallisce con messaggio di errore
+        load_dotenv(find_dotenv('.env'))
+        
         yield inspector
 
     def test_check_list_null(self, setUp):
@@ -33,6 +37,7 @@ class TestCultureInspectorIntegration:
             {"number": 5, "nationality": "Spain"}
         ]
         result = setUp.execute_tool(data)
+
 
         # Verifica che il risultato sia un dizionario con i campi previsti
         assert isinstance(result, dict)

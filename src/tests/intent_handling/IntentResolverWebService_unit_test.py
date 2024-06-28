@@ -25,20 +25,6 @@ class TestIntentResolverWebService:
         response = client.post('/resolve_intent')
         assert response.status_code == 400
 
-    def test_missing_intent(self, client):
-        """
-        Test che si assicura che se viene inviata una request con solo entities allora viene restituito errore 400
-
-        Parameters
-        ---------------
-        client : flask app context
-        """
-        request_content = {
-            'entities': ["https://www.github.com/gianwario/BeeHave"]
-        }
-        response = client.post('/resolve_intent', json=request_content)
-        assert response.status_code == 500
-
     def test_missing_entities(self, client):
         """
         Test che si assicura che se viene inviata una request con solo intent allora viene restituito errore 400

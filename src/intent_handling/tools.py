@@ -78,8 +78,10 @@ class CultureInspectorTool(Tool):
         """
 
         req = requests.post(os.environ.get('GEODISPERSION_URL'), json=data)
-        result = req.json()
-
+        try:
+            result = req.json()
+        except Exception as e:
+            return ["the list of developers is not well formed", "500"]
 
         return result
 
