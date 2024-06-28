@@ -79,7 +79,7 @@ If your machine is ARM64 bases you should opt for these steps:
 	- Set **5005** as port number.
 4. **Configure and start backend container backend via Docker Desktop**:
 	- In Docker Desktop, Go in section **Images**.
-	- find the image **leopoldotodisco/guido-frontens:1.0** and click on Play button.
+	- find the image **leopoldotodisco/guido-frontend:1.0** and click on Play button.
 	- Set **3000** as port number.
 5. Start you brand new containers and **open localhost:3000 in your browser**
 
