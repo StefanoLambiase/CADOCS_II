@@ -26,7 +26,7 @@ class TestIntentManager:
         # Mock requests.get method
         mocker.patch('requests.get', return_value=Mock(json=lambda: mock_response))
 
-        intent, entities, confidence, _= intent_manager_instance.detect_intent("can you give me a report?")
+        intent, entities, confidence, _ = intent_manager_instance.detect_intent("can you give me a report?")
 
         # Assertions
         assert intent == CadocsIntents.Report

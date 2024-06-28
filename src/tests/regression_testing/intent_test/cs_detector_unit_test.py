@@ -1,10 +1,8 @@
-from src.intent_handling import tools
 from src.intent_handling.tools import CsDetectorTool
 import requests
-from unittest.mock import mock_open, patch
+from unittest.mock import mock_open, patch, MagicMock
 import pytest
-import json
-
+import os
 
 class TestCsDetectorToolUT:
 
@@ -29,21 +27,23 @@ class TestCsDetectorToolUT:
             ]
         }
 
-        # Mock of the dotenv module
-        mocker.patch('src.intent_handling.tools.os.environ.get',
-                     return_value="CSDETECTOR_URL_GETSMELLS")
+        # Mock the environment variable
+        mocker.patch('os.environ.get', return_value="CSDETECTOR_URL_GETSMELLS")
 
-        # Mock of the Response object
-        mock_response = mocker.Mock(spec=requests.Response)
+        # Mock the Response object
+        mock_response = MagicMock(spec=requests.Response)
         mock_response.json.return_value = response
-        mock_response.status_code = 200  # Aggiungi status_code alla mock
+        mock_response.status_code = 200
 
         # Patch the requests.get method
         mocker.patch("requests.get", return_value=mock_response)
 
-        # Mock of the open method
+        # Mock the open method
         with patch("builtins.open", mock_open()) as mock_file:
             # Execute the tool
             result = cs_tool_instance.execute_tool(data)
             # Assertions
             assert result == ["response"]
+
+if __name__ == "__main__":
+    pytest.main()
