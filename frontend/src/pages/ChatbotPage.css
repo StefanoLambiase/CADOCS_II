@@ -1,9 +1,10 @@
 .chatbot-page {
   display: flex;
+  background-color: white;
   flex-direction: column;
   height: 100vh;
   width: 85%;
-  background-color: white;
+
 }
 
   .title {
