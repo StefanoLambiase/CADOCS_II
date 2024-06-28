@@ -34,31 +34,61 @@ The complete list of detectable community smells—through the use of csDetector
 
 ## How to Install The Tool:
 
-There are several ways to install the tool. We discuss them individually below.
+### Preliminar: Generate a Github PAT
 
+Follow these steps to create a Personal Access Token on GitHub:
+
+1. **Navigate to GitHub:**
+   - Login in to your github account.
+
+2. **Access Settings:**
+   - Click on your profile picture at the top right corner, and select **Settings** from the dropdown menu.
+
+3. **Personal Access Tokens:**
+   - In the left sidebar, click on **Developer settings**.
+   - Then click on **Personal access tokens**.
+   - Select **Tokens (classic)**.
+
+4. **Set Expiration:**
+   - Choose an expiration for your token. You can select a specific duration or opt for **No expiration**.
+
+5. **Set Permissions:**
+   - Assign the necessary permissions for your token. Typically, you might need to enable permissions such as `repo`, `write:discuss`, `project`, and `user`.
+
+6. **Generate Token:**
+   - Once you've configured the settings, click on **Generate token**.
+   - You will see a string representing your new Personal Access Token. **Copy and securely store this token**—it's important!
+
+Remember, your Personal Access Token is like a password—keep it secure and do not share it publicly.
+
+
+Now you should also install **Docker**.
 ### Docker Image pull ARM64
-1. Run the following command:
+If your machine is ARM64 bases you should opt for these steps:
+1. **Run the following command**:
    ```bash
    docker pull leopoldotodisco/guido-backend:1.0
-2. Run the command: 
+2. **Run the command**: 
     ```bash 
     docker pull leopoldotodisco/guido-frontend:1.0
-3. Configure and start backend container backend via Docker Desktop:
+3. **Configure and start backend container backend via Docker Desktop**:
 	- Open Docker Desktop.
-	- Go in section “Images”.
-	- find the image leopoldotodisco/guido-backend:1.0 and click on Play button.
-	- In *additional options*, add PAT in Env Variables.
-	- Set 5005 as port number.
-4. Configure and start backend container backend via Docker Desktop:
-	- In Docker Desktop, Go in section “Images”.
-	- find the image leopoldotodisco/guido-frontens:1.0 and click on Play button.
-	- Set 3000 as port number.
-5. Start you brand new containers
+	- Go in section **Images**.
+	- find the image **leopoldotodisco/guido-backend:1.0** and click on Play button.
+	- In **additional options**, add PAT in Env Variables and put the value of the PAT that you generated before.
+	- Set **5005** as port number.
+4. **Configure and start backend container backend via Docker Desktop**:
+	- In Docker Desktop, Go in section **Images**.
+	- find the image **leopoldotodisco/guido-frontens:1.0** and click on Play button.
+	- Set **3000** as port number.
+5. Start you brand new containers and **open localhost:3000 in your browser**
 
 ### Local Docker Build
 1. Clone our Repository
 2. Go in folder "docker" and add your PAT in dockerfile
 3. Run the following commands:
  ```bash
-    docker-compose build
-    docker compose up
+	docker-compose build
+	docker compose up 
+```
+5. **Open localhost:3000 in your browser**
