@@ -146,22 +146,27 @@ def build_error_message(lang):
     return text
 
 
-
+def build_custom_error_message(array):
+    result_message = array[0]
+    return result_message
 
 
 # this function will format the message basing on the intent
 def build_message(results, intent, entities, lang):
-    
     if intent == CadocsIntents.GetSmells or intent == CadocsIntents.GetSmellsDate:
-        response = build_cs_message(results, entities=entities, lang = lang)
-        return response
+        if results[1] == 890:
+            response = build_custom_error_message(results)
+            return response
+        else:
+            response = build_cs_message(results, entities=entities, lang = lang)
+            return response
     elif intent == CadocsIntents.Report:
         response = build_report_message(exec_type=entities[2], results=results, entities=entities, lang = lang)
         return response
     elif intent == CadocsIntents.Info:
         response = build_info_message(lang)
         return response
-    elif intent ==CadocsIntents.Geodispersion:
+    elif intent == CadocsIntents.Geodispersion:
         response = results
         return response
     else:
