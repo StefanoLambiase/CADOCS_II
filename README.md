@@ -64,7 +64,7 @@ Remember, your Personal Access Token is like a password—keep it secure and do 
 
 Now you should also install **Docker**.
 ### Docker Image pull ARM64
-If your machine is ARM64 bases you should opt for these steps:
+If your machine is ARM64 based you should opt for these steps:
 1. **Run the following command**:
    ```bash
    docker pull leopoldotodisco/guido-backend:1.0
@@ -80,6 +80,26 @@ If your machine is ARM64 bases you should opt for these steps:
 4. **Configure and start backend container backend via Docker Desktop**:
 	- In Docker Desktop, Go in section **Images**.
 	- find the image **leopoldotodisco/guido-frontend:1.0** and click on Play button.
+	- Set **3000** as port number.
+5. Start you brand new containers and **open localhost:3000 in your browser**
+
+### Docker Image pull x86
+If your machine is x86 based you should opt for these steps:
+1. **Run the following command**:
+   ```bash
+   docker pull benedettoscala/guido-backend
+2. **Run the command**: 
+    ```bash 
+    docker pull benedettoscala/guido-frontend
+3. **Configure and start backend container backend via Docker Desktop**:
+	- Open Docker Desktop.
+	- Go in section **Images**.
+	- find the image **benedettoscala/guido-backend** and click on Play button.
+	- In **additional options**, add PAT in Env Variables and put the value of the PAT that you generated before.
+	- Set **5005** as port number.
+4. **Configure and start backend container backend via Docker Desktop**:
+	- In Docker Desktop, Go in section **Images**.
+	- find the image **benedettoscala/guido-frontend** and click on Play button.
 	- Set **3000** as port number.
 5. Start you brand new containers and **open localhost:3000 in your browser**
 
