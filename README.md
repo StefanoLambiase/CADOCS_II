@@ -8,14 +8,14 @@ GUIDO is based on a previous tool for the detection of community smells, **CADOC
 
 ## How to Install The Tool
 
-In the following, we report the main steps to install GUIDO on your machine.
+In the following section, we report the main steps for installing GUIDO on your machine.
 
-### Preliminar: Generate a Github PAT
+### Preliminar: Generate a GitHub PAT
 
 Follow these steps to create a Personal Access Token on GitHub:
 
 1. **Navigate to GitHub:**
-   - Login in to your github account.
+   - Login into your GitHub account.
 
 2. **Access Settings:**
    - Click on your profile picture at the top right corner, and select **Settings** from the dropdown menu.
@@ -37,11 +37,11 @@ Follow these steps to create a Personal Access Token on GitHub:
 
 **IMPORTANT**: Remember, your Personal Access Token is like a password—keep it secure and do not share it publicly.
 
-Now you should also install **Docker**.
+Now, you should also install **Docker**.
 
 ### Docker Image pull ARM64
 
-If your machine is ARM64 based you should opt for these steps:
+If your machine is ARM64-based, you should opt for these steps:
 1. **Run the following command**:
    ```bash
    docker pull leopoldotodisco/guido-backend:latest
@@ -50,19 +50,19 @@ If your machine is ARM64 based you should opt for these steps:
     docker pull leopoldotodisco/guido-frontend:latest
 3. **Configure and start backend container backend via Docker Desktop**:
 	- Open Docker Desktop.
-	- Go in section **Images**.
+	- Go to section **Images**.
 	- find the image **leopoldotodisco/guido-backend:1.0** and click on Play button.
 	- In **additional options**, add PAT in Env Variables and put the value of the PAT that you generated before.
 	- Set **5005** as port number.
 4. **Configure and start backend container backend via Docker Desktop**:
-	- In Docker Desktop, Go in section **Images**.
+	- In Docker Desktop, Go to section **Images**.
 	- find the image **leopoldotodisco/guido-frontend:1.0** and click on Play button.
 	- Set **3000** as port number.
-5. Start you brand new containers and **open localhost:3000 in your browser**
+5. Start your brand new containers and **open localhost:3000 in your browser**
 
 ### Docker Image pull x86
 
-If your machine is x86 based you should opt for these steps:
+If your machine is x86-based, you should opt for these steps:
 1. **Run the following command**:
    ```bash
    docker pull benedettoscala/guido-backend
@@ -71,19 +71,19 @@ If your machine is x86 based you should opt for these steps:
     docker pull benedettoscala/guido-frontend
 3. **Configure and start backend container backend via Docker Desktop**:
 	- Open Docker Desktop.
-	- Go in section **Images**.
-	- find the image **benedettoscala/guido-backend** and click on Play button.
+	- Go to section **Images**.
+	- find the image **benedettoscala/guido-backend** and click on the Play button.
 	- In **additional options**, add PAT in Env Variables and put the value of the PAT that you generated before.
 	- Set **5005** as port number.
 4. **Configure and start backend container backend via Docker Desktop**:
-	- In Docker Desktop, Go in section **Images**.
+	- In Docker Desktop, Go to section **Images**.
 	- find the image **benedettoscala/guido-frontend** and click on Play button.
 	- Set **3000** as port number.
-5. Start you brand new containers and **open localhost:3000 in your browser**
+5. Start your brand new containers and **open localhost:3000 in your browser**
 
 ### Local Docker Build
 1. Clone our Repository
-2. Go in folder "docker" and add your PAT in dockerfile
+2. Go to folder "docker" and add your PAT in dockerfile
 3. Run the following commands:
  ```bash
 	docker-compose build
@@ -104,14 +104,14 @@ The complete list of detectable community smells—through the use of csDetector
 
 | Community Smell | Description | Refactoring Strategies |
 |---|---|---|
-| Organizational Silo | Siloed areas of the community that do not communicate, except through one or two of their respective members. | Restructure the community, Create communication plan, Mentoring, Cohesion exercising, Monitoring, and Introducing a social-rewarding mechanism. |
-| Black Cloud | Information overload due to lack of structured communications or cooperation governance. | Create communication plan, Restructure the community, and Introduce a Social sanctioning mechanism. | 
-| Radio Silence | One interposes herself into every formal interaction across more sub-communities with little flexibility to introduce other channels. | Restructure the community, Create communication plan, Mentoring, Cohesion exercising, Monitoring, and Introduce a Social sanctioning mechanism. | 
+| Organizational Silo | Siloed areas of the community that do not communicate except through one or two of their respective members. | Restructure the community, create a communication plan, mentor, conduct a cohesion exercise, monitor, and introduce a social-rewarding mechanism. |
+| Black Cloud | Information overload is due to a lack of structured communications or cooperation governance. | Create a communication plan, Restructure the community, and Introduce a Social sanctioning mechanism. | 
+| Radio Silence | One interposes herself into every formal interaction across more sub-communities with little flexibility to introduce other channels. | Restructure the community, Create a communication plan, Mentoring, Cohesion exercising, Monitoring, and Introduce a Social sanctioning mechanism. | 
 | Prima Donnas | A team of people is unwilling to respect external changes from other team members due to inefficiently structured collaboration. | NA | 
-| Sharing Villainy | Cause of a lack of information exchange, team members share essential knowledge such as outdated, wrong and unconfirmed information. | NA | 
+| Sharing Villainy | Cause of a lack of information exchange, team members share essential knowledge such as outdated, wrong, and unconfirmed information. | NA | 
 | Organizational Skirmish | A misalignment between different expertise levels of individuals involved in the project leads to dropped productivity and affects the project's timeline and cost. | NA | 
 | Solution Defiance | The development community presents different levels of cultural and experience background, leading to the division of the community into similar subgroups with completely conflicting opinions. | NA | 
 | Truck Factor Smell | Risk of significant knowledge loss due to the turnover of developers resulting from the fact that project information and knowledge are concentrated in a minority of the developers. | NA | 
-| Unhealthy Interaction | Long delays in stakeholder communications cause slow, light and brief conversations and discussions. | NA | 
+| Unhealthy Interaction | Long delays in stakeholder communications cause slow, light, and brief conversations and discussions. | NA | 
 | Toxic Communication | Toxic interactions and conflicting opinions among developers could push them to leave the project. | NA |
 
