@@ -6,6 +6,8 @@
 
 GUIDO is based on a previous tool for the detection of community smells, **CADOCS**, originally proposed by Voria et al. in a research paper published at ICSME 2022.
 
+The *documents* folder contains various artifacts that facilitate understanding GUIDO, including instructional videos on its usage.
+
 ## How to Install The Tool
 
 In the following section, we report the main steps for installing GUIDO on your machine.
