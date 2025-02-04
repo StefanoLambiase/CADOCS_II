@@ -1,7 +1,7 @@
 from src.intent_handling.cadocs_intent import CadocsIntents
 from src.intent_handling.tool_selector import ToolSelector
-from src.intent_handling.tools import CsDetectorTool
-
+from src.intent_handling.tools import CsDetectorTool, CultureInspectorTool
+from datetime import datetime
 # the Intent Resolver is used to handle the execution given a predicted intent
 class IntentResolver:
     def resolve_intent(self, intent, entities):
@@ -13,10 +13,16 @@ class IntentResolver:
                 tool = ToolSelector(CsDetectorTool())
                 # then we execute the selected tool with given entities
                 # here the date (if present) is set to the format requested by csDetector
-                if len(entities) > 2:
+                if len(entities) >= 2:
                     split_date = entities[1].split("/")
-                    entities[1] = ""+split_date[1]+"/"+split_date[0]+"/"+split_date[2]
-                
+                    # we conver the date to format '%Y-%m-%d'
+                    entities[1] = ""+split_date[2]+"/"+split_date[1]+"/"+split_date[0]
+                    # Convert to datetime object
+                    date_object = datetime.strptime(entities[1], '%Y/%m/%d')
+
+                    # Convert back to string in the desired format
+                    entities[1] = date_object.strftime('%Y-%m-%d')
+
                 results = tool.run(entities)
                 print("\n\n\nRESULT IN INTENT RESOLVER", results)
                 print("\n\n\n")
@@ -27,5 +33,11 @@ class IntentResolver:
             # build report message
             elif intent == CadocsIntents.Report:
                 return []
+            elif intent == CadocsIntents.Geodispersion:
+                tool = ToolSelector(CultureInspectorTool())
+                results = tool.run(entities)
+                print(f"\n\n\nRESULT IN INTENT RESOLVER {results}")
+
+                return results
 
         # else if intent in OtherToolIntent

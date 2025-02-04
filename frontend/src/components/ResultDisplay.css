@@ -1,0 +1,30 @@
+/* ResultDisplay.css */
+.result-display {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fefefe;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.result-display h3 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  font-family: 'Questrial', sans-serif;
+}
+
+.bold-text {
+  font-weight: bold;
+  margin-top: 15px; /* Increased margin for better spacing */
+}
+
+.content-text {
+  margin-top: 5px; /* Added margin for content text */
+}
+
+.effects-list {
+  margin-left: 18px;
+  margin-top: 10px; /* Added margin for better spacing */
+}
