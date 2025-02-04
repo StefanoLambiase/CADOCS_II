@@ -94,11 +94,9 @@ If your machine is x86 based you should opt for these steps:
 ## Other Tools
 
 The entire CADOCS tool is composed of three modules:
-- **CADOCS II** (this repository): The desktop application
-- **CADOCS**: it is the Slack App used to interact with users.
-- **CADOCS_NLU_Model** [link](https://github.com/alfcan/CADOCS_NLU_Model): it is the ML service used to interpret the users' intents.
-- **csDetector** [link](https://github.com/PaoloCarmine1201/csDetector): the augmented and wrapped version of csDetector, used in our tool to detect community smells and other socio-technical metrics.
-The links are referred to our modified versions of the tools.
+- **GUIDO** (this repository): The desktop application
+- **CADOCS** [link](https://github.com/gianwario/CADOCS): it is the original tool.
+- **csDetector** [link](https://github.com/PaoloCarmine1201/csDetector): the augmented and wrapped version of csDetector, used in our tool to detect community smells and other socio-technical metrics. The link is referred to our modified versions of the tool.
 
 ## Detectable Community Smells
 
