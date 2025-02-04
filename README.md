@@ -1,7 +1,14 @@
-# CADOCS II
+# GUIDO — Gathering and Understanding Socio-Technical Aspects in Development Organizations
 
+## Introduction
 
-## How to Install The Tool:
+**GUIDO** Is a conversational agent designed to operate locally, accessible through an executable file, enabling the identification and management of *community smells* in software development communities on GitHub.
+
+GUIDO is based on a previous tool for the detection of community smells, **CADOCS**, originally proposed by Voria et al. in a research paper published at ICSME 2022.
+
+## How to Install The Tool
+
+In the following, we report the main steps to install GUIDO on your machine.
 
 ### Preliminar: Generate a Github PAT
 
@@ -28,11 +35,12 @@ Follow these steps to create a Personal Access Token on GitHub:
    - Once you've configured the settings, click on **Generate token**.
    - You will see a string representing your new Personal Access Token. **Copy and securely store this token**—it's important!
 
-Remember, your Personal Access Token is like a password—keep it secure and do not share it publicly.
-
+**IMPORTANT**: Remember, your Personal Access Token is like a password—keep it secure and do not share it publicly.
 
 Now you should also install **Docker**.
+
 ### Docker Image pull ARM64
+
 If your machine is ARM64 based you should opt for these steps:
 1. **Run the following command**:
    ```bash
@@ -53,6 +61,7 @@ If your machine is ARM64 based you should opt for these steps:
 5. Start you brand new containers and **open localhost:3000 in your browser**
 
 ### Docker Image pull x86
+
 If your machine is x86 based you should opt for these steps:
 1. **Run the following command**:
    ```bash
@@ -81,13 +90,6 @@ If your machine is x86 based you should opt for these steps:
 	docker compose up 
 ```
 5. **Open localhost:3000 in your browser**
-
-
-## Introduction
-
-**CADOCS II** Is a conversational agent designed to operate locally, accessible through an executable file, enabling the identification and management of *community smells* in software development communities on GitHub.
-
-This repository hosts the modifications made to the original CADOCS repository, a tool used for Slack interactions.
 
 ## Other Tools
 
